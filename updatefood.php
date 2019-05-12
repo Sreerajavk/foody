@@ -52,7 +52,7 @@
 
                     }
                 }
-                xhttp.open("GET", "dishes.xml", true);
+                xhttp.open("GET", "dishes2.xml", true);
                 xhttp.send();
                 function parseXml(response) {
                         var xmlDoc = response.responseXML;
@@ -65,6 +65,7 @@
                         for(let name of xmlDoc.getElementsByTagName("hotel")){
 
                             //getting hotelname from get request
+                            console.log(xmlDoc);
                             var hotelname = "<?php echo $_GET['name']?>";
         
                             //accessing the table body element
@@ -119,10 +120,13 @@
 
                         var count=0;
                         var hotel = root.createElement("hotel");
+                        var location = root.createElement("location");
+                        location.appendChild(root.createTextNode(name.getElementsByTagName('location')[0].childNodes[0].nodeValue));
                         // root.appendChild(hotel)
                         // root.appendChild(hotel);
                         
-                        hotel.setAttribute("id" , name.getAttribute('id'))
+                        hotel.setAttribute("id" , name.getAttribute('id'));
+                        hotel.appendChild(location);
                             for(let dishes of name.getElementsByTagName("name")){
 
                                 let item = root.createElement("item");
@@ -139,8 +143,8 @@
                                         avail.appendChild(root.createTextNode("No"));                               
                                 }
                                 else{
-                                    console.log(name.getElementsByTagName("available")[0].childNodes[0].nodeValue);
-                                    let available = name.getElementsByTagName("available")[0].childNodes[0].nodeValue;
+                                    // console.log(name.getElementsByTagName("availability")[0].childNodes[0].nodeValue);
+                                    let available = name.getElementsByTagName("availability")[0].childNodes[0].nodeValue;
                                     avail.appendChild(root.createTextNode(available));
                                 }
                                 item.appendChild(hotel_name);
@@ -149,11 +153,13 @@
                                 count+=1;
                             
                         }
-
+                        
                         dishes.appendChild(hotel);
                         
+                        console.log(dishes);
+                        
                     }
-                    console.log(dishes);
+                    // console.log(dishes);
                     var xmlText = new XMLSerializer().serializeToString(dishes);
 
                     var xhttp2 = new XMLHttpRequest();

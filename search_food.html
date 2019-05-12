@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search food</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="jumbotron text-center">
+        <h1>Foody</h1>
+        <p>search your favourite food!</p>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-6">
+          <div class="panel panel-success">
+      <div class="panel-heading" style="text-align: center;font-size: 2em;">Search food</div>
+      <div class="panel-body">
+
+        <div class="form-group">
+            <label for="">Location</label>
+            <input type="text" class="form-control" id="location" placeholder="location">
+        </div>
+
+        <div class="form-group">
+                <label for="">Food</label>
+                <input type="text" class="form-control" id="food" placeholder="food">
+        </div>
+
+        <button id="bt" class="btn btn-primary">&nbsp;Search food&nbsp;</button>
+
+
+          <div class="alert alert-success" id="demo" style="margin-top:2em;opacity:0"></div>
+
+      </div>
+    </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+        $('#bt').click(function () {
+
+            var hotel_names="";
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if(xhttp.readyState == 4 && xhttp.status == 200){
+
+                    parseXml(xhttp);
+
+                }
+            }
+            xhttp.open("GET", "dishes2.xml", true);
+			xhttp.send();
+			function parseXml(response) {
+    				var xmlDoc = response.responseXML;
+    				var location1 = $('#location').val();
+    				var food1 = $('#food').val();
+                    console.log(xmlDoc)
+
+    				for(let name of xmlDoc.getElementsByTagName("hotel")){
+    				    var location2 = name.getElementsByTagName("location")[0].childNodes[0].nodeValue;
+    				    //var food = name.getElementsByTagName("food")[0].childNodes[0].nodeValue;
+                        //var name = name.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+
+    				    /*if(username == user && password == pass){
+    				        window.location.href = 'demo.php?name='+ name;
+    				        //console.log("found");
+                        }
+
+    				    else{
+    				        $('#demo').html("Invalid credentials");
+                        }
+                        */
+                        var count=0;
+                        for(let dishes of name.getElementsByTagName("name")){
+                            var food2 = dishes.childNodes[0].nodeValue;
+                            var avail = name.getElementsByTagName('availability')[count].childNodes[0].nodeValue;
+                            if(food1==food2 && location1==location2 && avail=='Yes'){
+                                hotel_names+=name.getAttribute('id') + '  ';
+                                //alert(name.getAttribute('id'))
+                            }
+                            count+=1;
+
+                        }
+
+                        //alert(locaton , food);
+                    }
+                    if(hotel_names==""){
+                        $('#demo').removeClass('alert-success');
+                        $('#demo').addClass('alert-danger');
+                        $('#demo').html('No Available hotels');
+                    }
+                    else{
+                        $('#demo').removeClass('alert-danger');
+                        $('#demo').addClass('alert-success');
+                        $('#demo').html('Available hotels : ' + hotel_names);
+                    }
+                    $('#demo').css({'opacity' : '1'})
+                    
+
+
+
+			}
+
+            //alert(hotel_names);
+            
+
+
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,46 +1,48 @@
 <hotelinfo>
     <hotel id="Hotel arya">
+        <location>pallimoola</location>
         <item>
-            <name>Ghee rice </name>
+            <name>Ghee rice</name>
+            <availability>Yes</availability>
+        </item>
+        <item>
+            <name>Paneer Butter Masala</name>
             <availability>No</availability>
         </item>
         <item>
-            <name>Paneer Butter Masala </name>
+            <name>Gobi Manjurian</name>
             <availability>No</availability>
         </item>
         <item>
-            <name>Gobi Manjurian </name>
-            <availability>No</availability>
+            <name>Porotta</name>
+            <availability>Yes</availability>
         </item>
         <item>
-            <name>Porotta </name>
-            <availability>No</availability>
-        </item>
-        <item>
-            <name>Masala Dosa </name>
+            <name>Masala Dosa</name>
             <availability>No</availability>
         </item>
     </hotel>
     <hotel id="Hotel cp">
+        <location>ramavarmapuram</location>
         <item>
             <name>Ghee rice </name>
-            <availability>No </availability>
+            <availability>No</availability>
         </item>
         <item>
-            <name>Paneer Butter Masala </name>
-            <availability>No </availability>
+            <name>Paneer Butter Masala</name>
+            <availability>No</availability>
         </item>
         <item>
-            <name>Gobi Manjurian </name>
-            <availability>No </availability>
+            <name>Gobi Manjurian</name>
+            <availability>No</availability>
         </item>
         <item>
-            <name>Porotta </name>
-            <availability>No </availability>
+            <name>Porotta</name>
+            <availability>No</availability>
         </item>
         <item>
-            <name>Masala Dosa </name>
-            <availability>No </availability>
+            <name>Masala Dosa</name>
+            <availability>No</availability>
         </item>
     </hotel>
 </hotelinfo>
