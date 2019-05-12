@@ -170,7 +170,7 @@
 
                         }
                     }
-                    xhttp2.open("GET", "update.php?content="+xmlText , true);
+                    xhttp2.open("GET", "writeContent.php?content="+xmlText , true);
                     xhttp2.send();
   
                     
